@@ -1,0 +1,91 @@
+/*menu lateral*/
+
+
+
+div#barra-lateral{
+	position:fixed;
+	margin-top: 55px;
+	width:200px;
+	height:100%;
+	background-color: #2f3030;
+	overflow:hidden;
+	-webkit-transition: 0.5s cubic-bezier(.61,.01,.37,1);
+	resize: horizontal;
+}
+
+div#logo-menu{
+	width:40px;
+	height:40px;
+	margin:5px;
+	background-image:url(../../imgs/icons/menu.png);
+}
+
+
+div.contenedor-logos{
+	margin-top:10px;
+	margin-left: 1px;
+	-webkit-transition: 0.3s;
+	color: white;
+	cursor: pointer;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+.botones_panel_lateral{
+	cursor: pointer;
+	color: white;
+	font-size: 40px;
+	border: solid 1.5px rgba(20, 178, 222, 0.4);
+	-webkit-transition: 0.3s;
+	margin: 3px;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+
+
+
+.botones_panel_lateral:hover{
+	text-shadow: 0 2px 5px rgb(20, 178, 222);
+	border: solid 1.5px rgb(20, 178, 222);
+	background: #394040;
+}
+
+.contenedor-logos:hover{
+	background: #394040;
+	text-shadow: 0 2px 5px rgb(20, 178, 222);
+}
+
+div.logo{
+	width:40px;
+	height:40px;
+	background-image:url(../../imgs/icons/menu.png);
+	float: left;
+}
+
+p.title-menu{
+	margin-left:60px;
+	line-height: 40px;
+}
+
+.folder-icono{
+	font-size: 32px;
+	padding: 5px;
+}
+
+.folder-etiqueta{
+	font-size: 22px;
+}
+
+#mostrar_panel-lateral{
+	position: fixed;
+	top: 45%;
+	left: -15px;
+	cursor: pointer;
+	background: blue;
+	font-size: 30px;
+	padding: 15px;
+	border-radius: 0px 50px 50px 0px;
+	z-index: 10;
+	visibility: hidden;
+}

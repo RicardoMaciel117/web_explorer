@@ -1,0 +1,181 @@
+/* CONTENEDOR DE ARCHS*/
+
+.pantalla-navegacion{
+
+}
+
+#contenedor-archivos{
+	border: solid #111112 1px;
+	height: 85.5%;
+	position: relative;
+	padding: 25px;
+	overflow-y: scroll;
+}
+
+#directorio-actual{
+	padding-top: 5px;
+	height: 48px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.7);
+	background: #2f3030;
+}
+
+.direccion-ruta{
+	display: inline-block;
+}
+
+.ruta-editable{
+	margin-left: 8px;
+	width: 70%;
+}
+
+.btn-ruta-edit{
+	margin-left: -4px;
+}
+
+.btn-dir-ruta{
+	padding: 8px;
+	font-size: 19px;
+	font-weight: bold;
+	background: linear-gradient(#454136, #21201e);
+	color: white;
+	cursor: pointer;
+	border: solid 1px #111112;
+}
+
+.btn-dir-ruta:hover{
+	background: linear-gradient(#454136, #0b0d12);
+	text-shadow: 9px;
+}
+
+
+#dir-ruta_left{
+	border-radius: 5px 0px 0px 5px;
+}
+
+#dir-ruta_right{
+	margin-left: -4px;
+	border-radius: 0px 5px 5px 0px;
+}
+
+#mostrar-ruta-editable{
+	visibility: hidden;
+	position: fixed;
+}
+
+@media (max-width: 740px){
+	/* :V */
+
+	#ruta-editable{
+    	left: 50%;
+    	top: 50%;
+    	transform: translate(-50%, -50%);
+    	-webkit-transform: translate(-50%, -50%);
+		position: fixed;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		padding: 7px;
+		margin: 0px;
+		border-radius: 3px;
+		width: 330px !important;
+		border: solid orange;
+		height: 70%;
+		display: none;
+		background: rgba(0,0,0, 0.6);
+		z-index: 1000;
+	}
+
+	.btn-ruta-edit{
+		width: 325px;
+		margin-left: 0px;
+	}
+
+	#mostrar-ruta-editable{
+		visibility: visible;
+		position: relative;
+	}
+
+}
+
+
+#pantalla_principal{
+	overflow:hidden;
+	-webkit-transition: 0.6s cubic-bezier(.61,.01,.37,1);
+	position: fixed;
+	margin-left: 202px;
+	width: calc(100% - 209px);
+	height: 99%;
+}
+
+.canvas_container{
+	overflow: hidden;
+	max-height: 68px;
+}
+
+
+.etiqueta-archivo{
+	color: white;
+	max-width: 97%;
+	height: 60px;
+	max-height: 60px;
+	position: relative;
+	overflow: hidden;
+}
+
+.letra-etiqueta{
+	display: inline-block;
+}
+
+.archivos{
+	display: inline-block;
+	width: 130px;
+	height: 105px;
+	margin: 10px;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.archivos:hover{
+	box-shadow: 0 0 2px 2px rgb(20, 178, 222);
+	background: rgba(20, 178, 222, 0.4);
+	border-radius: 1px;
+}
+
+.archivo-resaltado{
+	box-shadow: 0 0 2px 2px rgb(20, 178, 222);
+	background: rgba(20, 178, 222, 0.4);
+	border-radius: 1px;
+}
+
+#modal_busqueda{
+	display: none;
+	position: fixed;
+	padding: 7px;
+	width: 241px;
+	height: 62px;
+	top: 60px;
+	left: calc(100% - 282px);
+	box-shadow: 0 0 4px 7px blue;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+	z-index: 1001;
+}
+
+#herraminetas_busqueda{
+    margin-top: 4px;
+    padding: 4px;
+    background: white;
+    opacity: 0.9;
+    border-radius: 0px 0px 3px 3px;
+}
+
+.controles-busqueda{
+    float: right;
+}
+
+#modal_busqueda input{
+	padding: 2px;
+	font-size: 20px;
+
+}

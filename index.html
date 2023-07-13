@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+	<title>Code_Server</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/barra_lateral.css" />
+	<link rel="stylesheet" href="assets/css/principal.css">
+	<link rel="stylesheet" href="assets/css/panel_principal.css">
+	<link rel="stylesheet" href="assets/css/menu-click.css">
+	<link rel="stylesheet" href="assets/css/archivos_abiertos.css">
+</head>
+
+<body onload="block();">
+
+	<script type="text/javascript">
+		function block() {
+			const url = String(window.location);
+			if (url.includes("#")) {
+				window.location = url.replace("#", "");
+			}
+			window.onhashchange = function(e) {
+				history.pushState(null, "", "#");
+				document.getElementById("dir-ruta_left").click();
+			}
+			history.pushState(null, "", "#");
+		}
+
+
+
+	</script>
+
+	<!-- Start: Barra lateral >>>>>>>>>>>>>>>>>>>>>>-->
+	<div id="barra-lateral">
+
+		<span id="ocultar_panel_lateral" class="botones_panel_lateral folder-icono">⬅</span>
+		<span id="app_show_bar" class="botones_panel_lateral folder-icono">
+			&nbsp;B&nbsp;
+		</span>
+
+		<span id="play_button" onclick="togglePlay();" class="botones_panel_lateral folder-icono">
+			&nbsp;⏯️&nbsp;
+		</span>
+
+		<br>
+
+		<hr>
+
+	</div>
+	<!-- End: Barra lateral <<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+
+	<!-- Start: Barra Boton_mostrar_panel-lateral >>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+	<button id="mostrar_panel-lateral">➡️</button>
+
+	<!-- End: Barra Boton_mostrar_panel-lateral <<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+
+
+	<div id="directorio-actual" aria-flowto="Retos">&nbsp;
+		<div class="direccion-ruta">
+			<button id="dir-ruta_left" class="btn-dir-ruta">⬅</button>
+			<button id="dir-ruta_right" class="btn-dir-ruta">➡</button>
+			<button id="mostrar-ruta-editable" class="btn-dir-ruta">✎ /</button>
+		</div>
+
+		<div id="ruta-editable" class="direccion-ruta ruta-editable">
+
+		</div>
+
+		Arregla el contextmenu con el operador ternario x, y
+	</div>
+
+	<div id="pantalla_principal">
+
+
+		<div id="contenedor-archivos">
+
+		</div>
+
+	</div>
+
+
+
+
+	<div id="menu" class="menu_context">
+		<div id="Archs" style="display:none">
+			<a id="editar-archivo-self">
+			    <i class="ic">  ✎  </i> &nbsp; Editar Archivo &nbsp;
+		    </a>
+
+			<a id="editar-archivo">
+				<i class="ic">  🗗  </i> &nbsp; Editar (Nueva ventana) &nbsp;
+			</a>
+
+			<a id="descargar-archivo">
+			<i class="ic">  🡇  </i> &nbsp; Descargar Archivo &nbsp;
+		  </a>
+
+			<hr />
+			<a>
+			<i class="fa fa-fort-awesome"></i> Fort Awesome
+		  </a>
+			<a>
+			<i class="fa fa-flag"></i> Font Awesome
+		  </a>
+		</div>
+
+		<div id="Dirs" style="display:none">
+			<a id="abrir-directorio">
+				<i class="ic">  📂  </i> &nbsp; Abrir &nbsp;
+			</a>
+			<a>
+				<i class="ic">  🗗  </i> &nbsp; Abrir en otra pestaña &nbsp;
+			</a>
+			<a id="subir-archivo">
+			<i class="ic">  ⬆  </i> &nbsp; Subir Archivos &nbsp;
+		  </a>
+			<hr />
+			<a id="crear_archivo_men">
+			&nbsp; Crear Archivo
+		</a>
+			<hr>
+			<a id="comprimir_directorio_men">
+		&nbsp; Comprimir directorio
+		</a>
+		</div>
+
+		<!--div id="Gest" style="display:none">
+			<a id="">
+				<i class="ic">  📂  </i> &nbsp; Abrir &nbsp;
+			</a>
+			<a>
+				<i class="ic">  🗗  </i> &nbsp; Abrir en otra pestaña &nbsp;
+			</a>
+			<a >
+			<i class="ic">  ⬆  </i> &nbsp; Subir Archivos &nbsp;
+		  </a>
+			<hr />
+			<a onclick="mostrarModArch('')">
+			&nbsp; Crear Archivo
+		</a>
+			<hr>
+			<a onclick="mostrarModArch('zip')">
+		&nbsp; Comprimir directorio
+		</a>
+		</div-->
+
+
+	</div>
+
+	<style>
+
+	    .modal {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			border-radius: 5px;
+			background: rgb(46, 48, 51);
+			padding: 5%;
+			box-shadow: 0 0 2px 2px rgb(20, 178, 222);
+            font-size: 32px;
+            font-weight: bold;
+            color: #abb7cc;
+		}
+
+		.modal input{
+		    font-size: 20px;
+		    padding: 3px;
+		    border-radius: 3px;
+		    box-shadow: 5px 3px 5px black;
+		}
+
+		.opciones{
+		    border: solid 5px rgba(0,0,0, 0.5);
+		    cursor: pointer;
+		}
+
+		.etiqueta-modal{
+		    color: white;
+		    text-shadow: 0 0 5px black;
+		}
+
+	</style>
+
+	<div id="modal_busqueda">
+		<input type="text" id="busqueda" placeholder="Buscar ...">
+		<div id="herraminetas_busqueda">
+		    <span id="resultados_busqueda">0 de 0</span>
+		    &nbsp;
+		    <span class="controles-busqueda">
+		        <button id="bsq_archivo_anterior">🡸</button>
+		        <button id="bsq_archivo_siguiente" >🡺</button>
+		    </span>
+		</div>
+	</div>
+
+	<div id="modal_crear_elemento" class="modal" style="display: none;">
+	<center>
+		<span class="etiqueta-modal">Nombre del archivo </span>
+		<hr>
+		<input type="text" class="" id="nombre_elemento" placeholder="Nombre"><br>
+		<input type="button" class="opciones" id="crear_elemento" value="Crear">
+		<input type="button" class="opciones" id="comprimir_directorio" value="Comprimir">
+		<input type="button" class="opciones" id="cancelar_crear_elemento" value="Cancelar">
+        </center>
+    </div>
+
+    <div id="modal_subir_archivo" class="modal" style="display: none;">
+    	<div class="wrapper">
+    		<div class="container">
+    			<h1>Upload a file</h1>
+    			<div class="upload-container">
+    				<div class="border-container">
+    					<div class="icons fa-4x">
+    						<i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+    						<i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+    						<i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
+    					</div>
+    					<!--<input type="file" id="file-upload">-->
+    					<p>Drag and drop files here, or
+    						<a href="#" id="file-browser">browse</a> your computer.</p>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <style>
+
+        .wrapper {
+  margin: auto;
+  max-width: 640px;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  /*border: 0.5px solid rgba(130, 130, 130, 0.25);*/
+  /*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1),
+              0 0 0 1px rgba(0, 0, 0, 0.1);*/
+}
+
+h1 {
+  color: #130f40;
+  font-family: 'Varela Round', sans-serif;
+  letter-spacing: -.5px;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+.upload-container {
+  background-color: rgb(239, 239, 239);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.border-container {
+  border: 5px dashed rgba(198, 198, 198, 0.65);
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.border-container p {
+  color: #130f40;
+  font-weight: 600;
+  font-size: 1.1em;
+  letter-spacing: -1px;
+  margin-top: 30px;
+  margin-bottom: 0;
+  opacity: 0.65;
+}
+
+#file-browser {
+  text-decoration: none;
+  color: rgb(22,42,255);
+  border-bottom: 3px dotted rgba(22, 22, 255, 0.85);
+}
+
+#file-browser:hover {
+  color: rgb(0, 0, 255);
+  border-bottom: 3px dotted rgba(0, 0, 255, 0.85);
+}
+
+.icons {
+  color: #95afc0;
+  opacity: 0.55;
+}
+
+    </style>
+
+
+
+
+	<div id="apps_container_frame" class="">
+		<div id="header_app_frame" class="">
+			<button class="buttons_app_frame" onclick="mover_izq_apps_frame();">🡸</button>
+			<button class="buttons_app_frame" onclick="centrar_apps_frame();"><strong> &nbsp;⬌&nbsp;</strong></button>
+			<button class="buttons_app_frame" onclick="mover_der_apps_frame();">🡺</button>
+			<button class="buttons_app_frame" onclick="hide_apps_frame();">Ocultar</button>
+		</div>
+
+		<div id="apps_body_container" class="">
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="assets/js/gestor-servidor.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script type="text/javascript" src="assets/js/file-resolver.js"></script>
+	<script type="text/javascript" src="assets/js/gestor-archivos.js?cache"></script>
+	<script type="text/javascript" src="assets/js/gestor-archivos-abiertos.js?cache"></script>
+	<script type="text/javascript" src="assets/js/gestor-eventos.js?cache2"></script>
+	<script type="text/javascript" src="assets/js/gestor-contenido.js"></script>
+	<script type="text/javascript" src="assets/js/reproductor-musica.js"></script>
+	<script type="text/javascript" src="assets/js/menu-click.js"></script>
+
+	<script>
+
+	    $("#file-upload").css("opacity", "0");
+
+        $("#file-browser").click(function(e) {
+          e.preventDefault();
+          $("#file-upload").trigger("click");
+        });
+
+
+	</script>
+
+</body>
+
+</html>
+
+<!--
+Apuntes:
+Conseguir que los SYmbolics links (Enlace a archivos), de los myme_types sean las imagenes linkeadas
+
+consguir todos los archivos que no sean symbolics:
+find . -type l -exec readlink -f {} +
+Aprove: ls -la . | grep "\->"
+
+conseguir que el menu tenga mas opciones de desarrollo
+
+-->

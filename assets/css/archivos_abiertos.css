@@ -1,0 +1,40 @@
+
+#apps_container_frame{
+	visibility: hidden;
+	position: fixed;
+	z-index: 99999;
+	height: 98.5%;
+	width: 49%;
+	top: 2px;
+	left: 50.5%;
+	border: solid blue 3px !important;
+	border-radius: 2px;
+	box-shadow: 0 0 3px yellow;
+	background: #1b1b1b;
+	-webkit-transition: 0.3s;
+}
+
+#apps_body_container{
+
+	height: calc(100% - 51px);
+	width: 99.1%;
+
+}
+
+#header_app_frame{
+	padding: 2px;
+}
+
+.buttons_app_frame{
+	font-size: 23px;
+	padding: 2px;
+}
+
+.full_iframe_app{
+	width: 99%;
+	height: 99%;
+}
+
+.iframe_app{
+	border: solid purple;
+}
